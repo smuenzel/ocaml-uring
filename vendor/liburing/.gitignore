@@ -19,10 +19,14 @@
 /examples/io_uring-test
 /examples/io_uring-udp
 /examples/link-cp
+/examples/napi-busy-poll-client
+/examples/napi-busy-poll-server
 /examples/ucontext-cp
 /examples/poll-bench
+/examples/proxy
 /examples/send-zerocopy
 /examples/rsrc-update-bench
+/examples/kdigest
 
 /test/*.t
 /test/*.dmesg

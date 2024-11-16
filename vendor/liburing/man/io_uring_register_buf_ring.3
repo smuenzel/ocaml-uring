@@ -70,7 +70,19 @@ of the fields are reserved and must be cleared to zero.
 
 The
 .I flags
-argument is currently unused and must be set to zero.
+argument can be set to one of the following values:
+.TP
+.B IORING_REGISTER_PBUF_RING
+The buffers in this ring can be incrementally consumed. With partial
+consumption, each completion of a given buffer ID will continue where the
+previous one left off, or from the start if no completions have been seen yet.
+When more completions should be expected for a given buffer ID, the CQE will
+have
+.B IORING_CQE_F_BUF_MORE
+set in the
+.I flags
+member.
+.PP
 
 A shared buffer ring looks as follows:
 .PP
@@ -133,8 +145,13 @@ On success
 .BR io_uring_register_buf_ring (3)
 returns 0. On failure it returns
 .BR -errno .
+.SH NOTES
+Unless manual setup is needed, it's recommended to use
+.BR io_uring_setup_buf_ring (3)
+as it provides a simpler way to setup a provided buffer ring.
 .SH SEE ALSO
 .BR io_uring_buf_ring_init (3),
 .BR io_uring_buf_ring_add (3),
+.BR io_uring_setup_buf_ring (3),
 .BR io_uring_buf_ring_advance (3),
 .BR io_uring_buf_ring_cq_advance (3)
